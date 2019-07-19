@@ -3,7 +3,7 @@ const sequelize = require('sequelize');
 
 const { MYSQL_CONF } = require('../conf/db')
 
-const { } = require('../conf/db').MYSQL_CONF
+const { database, user, password, host } = require('../conf/db').MYSQL_CONF
 
 const con = mysql.createConnection(MYSQL_CONF)
 con.connect()
@@ -18,10 +18,11 @@ function exec (sql) {
     })
   })
 }
+console.log(database, user, password, host)
 
-const sq = new sequelize(MYSQL_CONF.database, MYSQL_CONF.username, MYSQL_CONF.password, {
-  host: MYSQL_CONF.host,
-  dialect: mysql,
+const sq = new sequelize(database, user, password, {
+  host: host,
+  dialect: 'mysql',
   pool: {
     max: 5,
     min: 0,
