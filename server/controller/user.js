@@ -59,7 +59,67 @@ class UserController {
    * @returns {Promise<void>}
    */
   static async postLogin (ctx) {
+    let user = ctx.request.body;
+    const {username, password} = user;
 
+    let userData = await userModel.findUserByName(username);
+    console.log('userData', userData.password)
+    // 判断用户是否存在
+    if(userData) {
+      // 判断前端传递的用户密码是否与数据库密码一致
+      if(bcrypt.compareSync(password, userData.password)) {
+        // 用户token
+        const userToken = {
+          username: userData.username,
+          id: userData.id
+        }
+        const token = jwt.sign(userToken, secret.sign, {expiresIn: '1h'})  // 签发token
+        ctx.body = {
+          message: '登录成功！',
+          data: {
+              id: userData.id,
+              username: userData.username,
+              token: token
+          },
+          code: 200
+        }
+      } else {
+        ctx.body = {
+          code: -1,
+          message: '用户名或密码错误'
+        }
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        message: '用户名不存在'
+      }
+    }
+  }
+
+  /**
+   * 获取用户信息
+   * @param ctx
+   * @returns {Promise<>}
+   */
+  static async getUserName(ctx) {
+    let username = ctx.query.username;
+
+    if(username) {
+      let userData = await userModel.findUserByName(username)
+      ctx.body = {
+        code: 200,
+        data : {
+          userData
+        },
+        message: '查询成功'
+      }
+    }else{
+      ctx.body = {
+        code: -1,
+        message: '用户名必须传'
+      }
+    }
   }
 }
 

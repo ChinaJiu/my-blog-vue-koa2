@@ -33,6 +33,7 @@ router.post('/createUser', UserController.createUser);
 // 登录
 router.post('/login', UserController.postLogin);
 // 获取用户信息
+router.get('/userInfo', UserController.getUserName);
 
 
 module.exports = router;

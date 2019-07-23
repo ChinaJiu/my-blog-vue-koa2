@@ -25,10 +25,10 @@ const secret = require('./conf/secret')
 onerror(app)
 
 // 跨域
-// app.use(cors());
+app.use(cors());
 // jwt
 
-// app.use(jwt({secret: secret.sign}).unless({path: [/^\/api\/v1\/login/, /^\/api\/v1\/createUser/]}))
+app.use(jwt({secret: secret.sign}).unless({path: [/^\/api\/v1\/login/, /^\/api\/v1\/createUser/]}))
 
 // middlewares
 

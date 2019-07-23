@@ -4,7 +4,6 @@ const { database, user, password, host } = require('../conf/db').MYSQL_CONF;
 const sequelize = new Sequelize(database, user, password, {
     host: host,
     dialect: 'mysql',
-    operatorsAliases: false,
     dialectOptions: {
         charset: "utf8mb4",
         collate: "utf8mb4_unicode_ci",
