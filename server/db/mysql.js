@@ -1,35 +1,25 @@
-const mysql = require('mysql');
-const sequelize = require('sequelize');
+const Sequelize = require('sequelize');
+const { database, user, password, host } = require('../conf/db').MYSQL_CONF;
 
-const { MYSQL_CONF } = require('../conf/db')
-
-const { database, user, password, host } = require('../conf/db').MYSQL_CONF
-
-const con = mysql.createConnection(MYSQL_CONF)
-con.connect()
-function exec (sql) {
-  return new Promise ((resolve, reject) => {
-    con.query(sql, (err, result) => {
-      if(err) {
-        reject(err)
-        return
-      }
-      resolve(result)
-    })
-  })
-}
-console.log(database, user, password, host)
-
-const sq = new sequelize(database, user, password, {
-  host: host,
-  dialect: 'mysql',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 3000
-  }
-})
+const sequelize = new Sequelize(database, user, password, {
+    host: host,
+    dialect: 'mysql',
+    operatorsAliases: false,
+    dialectOptions: {
+        charset: "utf8mb4",
+        collate: "utf8mb4_unicode_ci",
+        supportBigNumbers: true,
+        bigNumberStrings: true
+    },
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    timezone: '+08:00' //东八时区
+});
 
 module.exports = {
-  exec
+  sequelize
 }

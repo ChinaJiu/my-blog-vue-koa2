@@ -9,7 +9,7 @@ if( env === 'dev' ) {
     user: 'root',
     password: '=-0987654321`',
     port: '3306',
-    database: 'myblog'
+    database: 'node-vue-koa2'
   }
   REDIS_CONF = {
     host: '127.0.0.1',
@@ -23,7 +23,7 @@ if( env === 'production' ) {
     user: 'root',
     password: '=-0987654321`',
     port: '3306',
-    database: 'myblog'
+    database: 'node-vue-koa2'
   }
   REDIS_CONF = {
     host: '127.0.0.1',
