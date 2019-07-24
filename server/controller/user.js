@@ -73,7 +73,7 @@ class UserController {
           username: userData.username,
           id: userData.id
         }
-        const token = jwt.sign(userToken, secret.sign, {expiresIn: '1h'})  // 签发token
+        const token = jwt.sign(userToken, secret.sign, {expiresIn: '10h'})  // 签发token
         ctx.body = {
           message: '登录成功！',
           data: {

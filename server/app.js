@@ -28,7 +28,13 @@ onerror(app)
 app.use(cors());
 // jwt
 
-app.use(jwt({secret: secret.sign}).unless({path: [/^\/api\/v1\/login/, /^\/api\/v1\/createUser/]}))
+app.use(jwt({secret: secret.sign}).unless({
+  path: [
+      /^\/api\/v1\/login/,
+      /^\/api\/v1\/createUser/,
+      /^\/api\/v1\/article/
+  ]
+}))
 
 // middlewares
 
