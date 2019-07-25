@@ -23,7 +23,6 @@ const secret = require('./conf/secret')
 
 // error handler
 onerror(app)
-
 // 跨域
 app.use(cors());
 // jwt

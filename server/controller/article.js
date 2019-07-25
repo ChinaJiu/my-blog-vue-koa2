@@ -52,7 +52,6 @@ class ArticleController {
                 message: '查询列表失败'
             }
         }
-        
     }
 
     /**
