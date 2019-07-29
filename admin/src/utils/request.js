@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -7,9 +7,7 @@ const service = axios.create({
 })
 
 // 请求拦截
-service.interceptors.request.use(
-  config => {
-
+service.interceptors.request.use(config => {
     return config
   },
   error => {
@@ -19,8 +17,7 @@ service.interceptors.request.use(
 )
 
 // 响应拦截
-service.interceptors.response.use(
-  response => {
+service.interceptors.response.use(response => {
     const res = response.data
 
     if (res.code !== 20000) {
@@ -59,4 +56,4 @@ service.interceptors.response.use(
   }
 )
 
-export default service;
+export default service
