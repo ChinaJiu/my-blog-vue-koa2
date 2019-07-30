@@ -1,23 +1,37 @@
 <template>
   <div class="app-main">
     app-main
+    <div>username: {{userName}}</div>
+    <div>avatar: {{userAvatar}}</div>
+    
   </div>
 </template>
 
 <script>
-import { getArticle } from '@/api/article'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
+      arr: ''
     }
   },
   async mounted () {
-    let article = await getArticle({ param: { a: 2 } })
-    console.log(article)
+    await this.setUser()
   },
   activated () {
     
+  },
+  computed: {
+    ...mapState({
+      userName: state => state.user.name,
+      userAvatar: state => state.user.avatar
+    })
+  },
+  methods: {
+    ...mapActions('user', [
+      'setUser'
+    ])
   }
 }
 </script>

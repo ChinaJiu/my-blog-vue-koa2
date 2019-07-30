@@ -1,8 +1,9 @@
-import { login } from '@/api/user'
+import { getUser } from '@/api/user'
 
 const state = {
   name: '',
-  avatar: ''
+  avatar: '',
+  article: '123'
 }
 
 const mutations = {
@@ -18,9 +19,10 @@ const mutations = {
 }
 
 const actions = {
-  // user login
-  login () {
-    login()
+  async setUser ({ commit }) {
+    const data = (await getUser()).data
+    commit('SET_NAME', data.name)
+    commit('SET_AVATAR', data.avatar)
   }
 }
 
