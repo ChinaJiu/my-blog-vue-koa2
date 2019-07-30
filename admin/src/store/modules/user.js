@@ -1,15 +1,17 @@
-import { getUser } from '@/api/user'
+import { getUser, login } from '@/api/user'
+import Cookies from 'js-cookie'
 
 const state = {
   name: '',
   avatar: '',
-  article: '123'
+  article: '',
+  token: Cookies.get('token_RD')
 }
 
 const mutations = {
-  // SET_TOKEN: (state, token) => {
-  //   state.token = token
-  // },
+  SET_TOKEN: (state, token) => {
+    state.token = token
+  },
   SET_NAME: (state, name) => {
     state.name = name
   },
@@ -19,6 +21,13 @@ const mutations = {
 }
 
 const actions = {
+  async setToken ({ commit }, userInfo) {
+    const { username, password } = userInfo
+    const result = await login({ username: username, password: password })
+    Cookies.set('token_RD', result.data.token)
+    commit('SET_TOKEN', result.data.token)
+    return result
+  },
   async setUser ({ commit }) {
     const data = (await getUser()).data
     commit('SET_NAME', data.name)

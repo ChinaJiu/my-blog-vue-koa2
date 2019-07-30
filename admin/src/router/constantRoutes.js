@@ -1,6 +1,10 @@
 import Layout from '@/layout'
+import Login from '@/views/login'
 
 export const constantRoutes = [
+  
+  // 404 page must be placed at the end !!!
+  { path: '/login', component: Login },
   {
     path: '/',
     name: 'Layout',
@@ -29,5 +33,6 @@ export const constantRoutes = [
         name: 'Tree'
       }
     ]
-  }
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ]

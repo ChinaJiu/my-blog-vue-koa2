@@ -11,6 +11,31 @@ Vue.use(htmlToPdf)
 
 Vue.config.productionTip = false
 
+const whiteList = ['/login'] // no redirect whitelist
+
+router.beforeEach((to, from, next) => {
+  console.log('token', store.getters.token)
+  const hasToken = store.getters.token
+
+  if (hasToken) {
+    
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) {
+      // in the free login whitelist, go directly
+      console.log(1)
+      next()
+    } else {
+      console.log(2)
+      // other pages that do not have permission to access are redirected to the login page.
+      console.log(to.path)
+      next(`/login`)
+    }
+  }
+})
+router.afterEach(() => {
+  console.log('afterEach')
+})
+
 new Vue({
   router,
   store,

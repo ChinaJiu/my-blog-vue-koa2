@@ -11,16 +11,14 @@ const service = axios.create({
 
 // 请求拦截
 service.interceptors.request.use(config => {
-  console.log(config)
     let data = config.data
     if (data && !data.isLoading) isLoading = false
-
-    if (isLoading) loadingInstance = Loading.service()
+    openLoading()
     return config
   },
   error => {
     console.log(error)
-    if (isLoading) loadingInstance.close()
+    closeLoading()
     return Promise.reject(error)
   }
 )
@@ -50,7 +48,8 @@ service.interceptors.response.use(response => {
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      if (isLoading) loadingInstance.close()
+      closeLoading()
+      console.log(res)
       return res
     }
   },
@@ -61,9 +60,17 @@ service.interceptors.response.use(response => {
       type: 'error',
       duration: 5 * 1000
     })
-    if (isLoading) loadingInstance.close()
+    closeLoading()
     return Promise.reject(error)
   }
 )
+
+function openLoading () {
+  if (isLoading) loadingInstance = Loading.service()
+}
+
+function closeLoading () {
+  if (isLoading) loadingInstance.close()
+}
 
 export default service

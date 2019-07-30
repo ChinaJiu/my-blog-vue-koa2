@@ -3,6 +3,7 @@
     app-main
     <div>username: {{userName}}</div>
     <div>avatar: {{userAvatar}}</div>
+    <div>token: {{token}}</div>
     
   </div>
 </template>
@@ -25,7 +26,8 @@ export default {
   computed: {
     ...mapState({
       userName: state => state.user.name,
-      userAvatar: state => state.user.avatar
+      userAvatar: state => state.user.avatar,
+      token: state => state.user.token
     })
   },
   methods: {
