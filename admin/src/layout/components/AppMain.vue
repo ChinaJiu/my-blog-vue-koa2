@@ -5,12 +5,19 @@
 </template>
 
 <script>
+import { getArticle } from '@/api/article'
+
 export default {
   data () {
     return {
     }
   },
+  async mounted () {
+    let article = await getArticle({ param: { a: 2 } })
+    console.log(article)
+  },
   activated () {
+    
   }
 }
 </script>

@@ -1,5 +1,8 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import { Message, MessageBox, Loading } from 'element-ui'
+
+let loadingInstance // 加载实例
+let isLoading = true // 是否需要出现加载动画
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -8,10 +11,16 @@ const service = axios.create({
 
 // 请求拦截
 service.interceptors.request.use(config => {
+  console.log(config)
+    let data = config.data
+    if (data && !data.isLoading) isLoading = false
+
+    if (isLoading) loadingInstance = Loading.service()
     return config
   },
   error => {
     console.log(error)
+    if (isLoading) loadingInstance.close()
     return Promise.reject(error)
   }
 )
@@ -19,7 +28,6 @@ service.interceptors.request.use(config => {
 // 响应拦截
 service.interceptors.response.use(response => {
     const res = response.data
-
     if (res.code !== 20000) {
       Message({
         message: res.message || 'Error',
@@ -42,6 +50,7 @@ service.interceptors.response.use(response => {
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
+      if (isLoading) loadingInstance.close()
       return res
     }
   },
@@ -52,6 +61,7 @@ service.interceptors.response.use(response => {
       type: 'error',
       duration: 5 * 1000
     })
+    if (isLoading) loadingInstance.close()
     return Promise.reject(error)
   }
 )

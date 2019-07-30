@@ -7,7 +7,7 @@
         mode="vertical"
       >
         <sidebar-item></sidebar-item>
-        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+        <!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
       </el-menu>
     </el-scrollbar>
   </div>
