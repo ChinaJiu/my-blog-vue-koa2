@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   getters: {
-    token: state => state.user.token
+    token: state => state.user.token,
+    roles: state => state.user.roles,
+    permission_routes: state => state.permission.routes
   },
   mutations: {},
   actions: {}

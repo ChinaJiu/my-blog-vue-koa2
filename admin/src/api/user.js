@@ -15,3 +15,11 @@ export async function getUser (data) {
     data
   })
 }
+
+export async function getRoles (data) {
+  return request({
+    url: '/roles',
+    method: 'get',
+    data
+  })
+}

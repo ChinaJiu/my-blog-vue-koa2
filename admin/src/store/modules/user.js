@@ -1,11 +1,12 @@
-import { getUser, login } from '@/api/user'
+import { getUser, login, getRoles } from '@/api/user'
 import Cookies from 'js-cookie'
 
 const state = {
   name: '',
   avatar: '',
   article: '',
-  token: Cookies.get('token_RD')
+  token: Cookies.get('token_RD'),
+  roles: ''
 }
 
 const mutations = {
@@ -17,6 +18,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLES: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -32,6 +36,11 @@ const actions = {
     const data = (await getUser()).data
     commit('SET_NAME', data.name)
     commit('SET_AVATAR', data.avatar)
+  },
+  async getRoles ({ commit }) {
+    const roles = (await getRoles()).data
+    commit('SET_ROLES', roles)
+    return roles
   }
 }
 

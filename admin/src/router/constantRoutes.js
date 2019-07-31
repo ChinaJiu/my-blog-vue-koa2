@@ -33,6 +33,5 @@ export const constantRoutes = [
         name: 'Tree'
       }
     ]
-  },
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]

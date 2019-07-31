@@ -1,0 +1,42 @@
+import router from './router'
+import store from './store'
+import { Message } from 'element-ui'
+
+const whiteList = ['/login'] // no redirect whitelist
+
+router.beforeEach(async (to, from, next) => {
+  console.log('token', store.getters.token)
+  const hasToken = store.getters.token
+  if (hasToken) {
+    if (to.path === '/login') {
+      next({ path: '/' })
+    } else {
+      next()
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      if (hasRoles) {
+        next()
+      } else {
+        try {
+          console.log(router)
+          const { roles } = await store.dispatch('user/getRoles')
+          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          router.addRoutes(accessRoutes)
+          next({ ...to, replace: true })
+        } catch (error) {
+          Message.error(error || 'Has Error')
+          next(`/login?redirect=${to.path}`)
+        }
+      }
+    }
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next(`/login`)
+    }
+  }
+})
+
+router.afterEach(() => {
+  
+})
