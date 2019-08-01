@@ -1,50 +1,70 @@
 <template>
-  <div class="item-wrapper">
-    <el-submenu index="1">
-      <template slot="title">
-        <i class="el-icon-location"></i>
-        <span slot="title">导航一</span>
-      </template>
-      <el-menu-item-group>
-        <span slot="title">分组一</span>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <span slot="title">选项4</span>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
+  <div class="item-wrapper" v-if="!item.hidden">
+    <!-- {{item.hidden}}1 -->
+    <template v-if="!item.children">
+      <!-- <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)"> -->
+        <el-menu-item :index="item.path">
+          <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title" />
+        </el-menu-item>
+      <!-- </app-link> -->
+    </template>
+
+    <template v-else>
+      <el-submenu ref="subMenu" :index="item.path" popper-append-to-body>
+        <template slot="title">
+          <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title" />
+        </template>
+        <sidebar-item
+          v-for="child in item.children"
+          :key="child.path"
+          :is-nest="true"
+          :item="child"
+          :base-path="resolvePath(child.path)"
+          class="nest-menu"
+        />
       </el-submenu>
-    </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
-    </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <i class="el-icon-document"></i>
-      <span slot="title">导航三</span>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <span slot="title">导航四</span>
-    </el-menu-item>
+    </template>
   </div>
-    
 </template>
 <script>
+import path from 'path'
+import Item from './item'
+
 export default {
-  data () {
-    return {
+  name: 'SidebarItem',
+  components: {
+    Item
+  },
+  props: {
+    item: {
+      type: Object
+    },
+    isNest: {
+      type: Boolean,
+      default: false
+    },
+    basePath: {
+      type: String,
+      default: 'nn'
     }
   },
-  activated () {
+  data () {
+    this.onlyOneChild = null
+    return {
+
+    }
+  },
+  mounted () {
+  },
+  methods: {
+    resolvePath (routePath) {
+      if (/^(https?:|mailto:|tel:)/.test(routePath)) {
+        return routePath
+      }
+      console.log(this.basePath, routePath, path.resolve(this.basePath, routePath))
+      // console.log('path.resolve---', path.resolve(this.basePath, routePath))
+      return path.resolve(this.basePath, routePath)
+    }
   }
 }
 </script>

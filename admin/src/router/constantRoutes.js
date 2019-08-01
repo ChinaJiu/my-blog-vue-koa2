@@ -1,36 +1,45 @@
-import Layout from '@/layout'
-import Login from '@/views/login'
+// import Login from '@/views/login'
 
 export const constantRoutes = [
   
   // 404 page must be placed at the end !!!
-  { path: '/login', component: Login },
+  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  { path: '/ex', meta: { title: 'ex', icon: 'edit' } },
   {
     path: '/',
     name: 'Layout',
-    component: Layout,
+    component: () => import('@/layout/index'),
     redirect: '/dashboard',
+    meta: { title: 'Dashboard', icon: 'edit' },
     children: [{
-      path: 'dashboard',
+      path: '/dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: 'Dashboard', icon: 'edit' }
+    },
+    {
+      path: '/dashboard2',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: 'Dashboard', icon: 'edit' }
     }]
   },
   {
     path: '/example',
-    component: Layout,
+    component: () => import('@/layout/index'),
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: 'Example', icon: 'delete' },
     children: [
       {
-        path: 'table',
-        name: 'Table'
+        path: '/table',
+        name: 'Table',
+        meta: { title: 'Table', icon: 'edit' }
       },
       {
-        path: 'tree',
-        name: 'Tree'
+        path: '/tree',
+        name: 'Tree',
+        meta: { title: 'Tree', icon: 'edit' }
       }
     ]
   }

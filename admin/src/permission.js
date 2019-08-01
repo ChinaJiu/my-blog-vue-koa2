@@ -21,6 +21,7 @@ router.beforeEach(async (to, from, next) => {
           const { roles } = await store.dispatch('user/getRoles')
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
           router.addRoutes(accessRoutes)
+          console.log('我在异步加载动态路由')
           next({ ...to, replace: true })
         } catch (error) {
           Message.error(error || 'Has Error')
