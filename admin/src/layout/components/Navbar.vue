@@ -1,30 +1,18 @@
 <template>
   <div class="navbar">
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item 
-        v-for="item in breadcrumb" 
-        :key="item.id"
-        :to="{path: item.path}"
-      >
-      {{item.name}}
-      </el-breadcrumb-item>
-    </el-breadcrumb>
+    <breadcrumb></breadcrumb>
   </div>
 </template>
 <script>
+import Breadcrumb from '@/components/Breadcrumb'
+
 export default {
+  components: {
+    Breadcrumb
+  },
   data () {
     return {
-      breadcrumb: [
-        {
-          path: '/',
-          name: '首页'
-        },
-        {
-          path: '/',
-          name: '活动管理'
-        }
-      ]
+      
     }
   },
   activated () {

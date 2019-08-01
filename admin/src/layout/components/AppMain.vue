@@ -4,7 +4,7 @@
     <div>username: {{userName}}</div>
     <div>avatar: {{userAvatar}}</div>
     <div>token: {{token}}</div>
-    
+    <router-view/>
   </div>
 </template>
 
@@ -20,8 +20,7 @@ export default {
   async mounted () {
     await this.setUser()
   },
-  activated () {
-    
+  created () {
   },
   computed: {
     ...mapState({

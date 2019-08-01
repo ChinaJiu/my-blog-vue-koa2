@@ -15,7 +15,6 @@
 				<app-main />
 			</div>
 		</div>
-		
 	</div>
 </template>
 <script>

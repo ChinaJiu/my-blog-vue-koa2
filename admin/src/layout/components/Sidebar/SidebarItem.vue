@@ -1,12 +1,12 @@
 <template>
   <div class="item-wrapper" v-if="!item.hidden">
     <!-- {{item.hidden}}1 -->
-    <template v-if="!item.children">
-      <!-- <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)"> -->
+    <template v-if="hasOneShowingChild(item.children,item)">
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="item.path">
-          <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title" />
+          <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" />
         </el-menu-item>
-      <!-- </app-link> -->
+      </app-link>
     </template>
 
     <template v-else>
@@ -28,12 +28,14 @@
 </template>
 <script>
 import path from 'path'
-import Item from './item'
+import Item from './Item'
+import AppLink from './Link'
 
 export default {
   name: 'SidebarItem',
   components: {
-    Item
+    Item,
+    AppLink
   },
   props: {
     item: {
@@ -55,8 +57,29 @@ export default {
     }
   },
   mounted () {
+
   },
   methods: {
+    hasOneShowingChild (children = [], parent) {
+      const showingChildren = children.filter(item => {
+        if (item.hidden) {
+          return false
+        } else {
+          // Temp set(will be used if only has one showing child)
+          this.onlyOneChild = item
+          return true
+        }
+      })
+
+      if (showingChildren.length === 1) {
+        return true
+      }
+
+      if (showingChildren.length === 0) {
+        this.onlyOneChild = { ...parent, path: '' }
+        return true
+      }
+    },
     resolvePath (routePath) {
       if (/^(https?:|mailto:|tel:)/.test(routePath)) {
         return routePath
