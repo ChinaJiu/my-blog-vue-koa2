@@ -1,8 +1,8 @@
-const path = require('path');
-const defaultSettings = require('./src/setting');
+const path = require('path')
+const defaultSettings = require('./src/setting')
 
-function resolve(dir) {
-  return path.join(__dirname, dir);
+function resolve (dir) {
+  return path.join(__dirname, dir)
 }
 const name = defaultSettings.title || 'vue Admin Template' // page title
 

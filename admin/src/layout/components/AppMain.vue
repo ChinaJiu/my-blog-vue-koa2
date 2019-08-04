@@ -21,6 +21,7 @@ export default {
     await this.setUser()
   },
   created () {
+
   },
   computed: {
     ...mapState({

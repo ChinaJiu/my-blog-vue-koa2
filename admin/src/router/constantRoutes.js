@@ -2,8 +2,13 @@ import Layout from '@/layout'
 
 export const constantRoutes = [
   
-  // 404 page must be placed at the end !!!
-  { path: '/login',
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404.vue'),
+    hidden: true
+  },
+  { 
+    path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true 
   },

@@ -5,14 +5,16 @@ import { Message } from 'element-ui'
 const whiteList = ['/login'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
-  console.log('token', store.getters.token)
   const hasToken = store.getters.token
+  console.log(hasToken)
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
       next()
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      const roles = store.getters.roles
+      const hasRoles = roles.roles && roles.roles.length > 0
+      console.log(hasRoles)
       if (hasRoles) {
         next()
       } else {
@@ -33,7 +35,7 @@ router.beforeEach(async (to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      next(`/login`)
+      next(`/login?redirect=${to.path}`)
     }
   }
 })
