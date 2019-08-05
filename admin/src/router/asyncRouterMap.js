@@ -1,5 +1,5 @@
 import Layout from '@/layout'
-import Permission from '@/views/permission'
+// import Permission from '@/views/permission'
 
 /**
  * meta.roles 页面需要的权限
