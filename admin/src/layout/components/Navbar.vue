@@ -1,5 +1,6 @@
 <template>
   <div class="navbar">
+
     <breadcrumb></breadcrumb>
   </div>
 </template>
@@ -23,5 +24,6 @@ export default {
 <style lang='scss' scoped>
 .navbar{
   width: 100%;
+  height: 50px;
 }
 </style>

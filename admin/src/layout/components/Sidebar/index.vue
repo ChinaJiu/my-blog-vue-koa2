@@ -33,12 +33,18 @@ export default {
   }
 }
 </script>
+<style lang='scss'>
+.el-menu{
+  border-right: none;
+}
+</style>
+
 <style lang='scss' scoped>
 
 .sidebar{
   width: $sideBarWidth;
   height: 100%;
-
+  border-right: solid 1px #e6e6e6;
   .el-scrollbar{
     height: 100%;
   }
