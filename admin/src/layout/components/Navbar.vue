@@ -1,6 +1,5 @@
 <template>
   <div class="navbar">
-
     <breadcrumb></breadcrumb>
   </div>
 </template>
