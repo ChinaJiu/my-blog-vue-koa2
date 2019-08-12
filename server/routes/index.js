@@ -1,27 +1,8 @@
-// const router = require('koa-router')()
-
-// router.get('/', async (ctx, next) => {
-//   await ctx.render('index', {
-//     title: 'Hello Koa 2!'
-//   })
-// })
-
-// router.get('/string', async (ctx, next) => {
-//   ctx.body = 'koa2 string'
-// })
-
-// router.get('/json', async (ctx, next) => {
-//   ctx.body = {
-//     title: 'koa2 json'
-//   }
-// })
-
-// module.exports = router
-
 const Router = require('koa-router');
-const UserController = require('../controller/user')
-const ArticleController = require('../controller/article')
-
+const UserController = require('../controller/v1/user')
+const ArticleController = require('../controller/v1/article')
+const CategoryController = require('../controller/v1/category')
+const CommentController = require('../controller/v1/comment')
 const router = new Router({
   prefix: '/api/v1'
 })
@@ -50,6 +31,19 @@ router.delete('/article/:id', ArticleController.deleteArticle);
 // 更改文章
 router.put('/article/:id', ArticleController.updateArticle);
 
+/**
+ * 标签接口
+ */
+//创建标签
+// router.post('/category', CategoryController.createCategory)
+
+/**
+ * 评论窗口
+ */
+//创建评论
+router.post('/comment', CommentController.createComment)
+//删除评论
+router.delete('/comment/:id', CommentController.deleteComment)
 
 module.exports = router;
 

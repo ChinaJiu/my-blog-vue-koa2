@@ -1,4 +1,4 @@
-const ArticleModel = require('../model/article')
+const ArticleModel = require('../../model/article')
 
 class ArticleController {
     /**

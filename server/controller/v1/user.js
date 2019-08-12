@@ -1,6 +1,6 @@
-const userModel = require('../model/user');
+const userModel = require('../../model/user');
 const jwt = require('jsonwebtoken');
-const secret = require('../conf/secret');
+const secret = require('../../conf/secret');
 const bcrypt = require('bcryptjs');
 
 class UserController {
@@ -73,7 +73,7 @@ class UserController {
           username: userData.username,
           id: userData.id
         }
-        const token = jwt.sign(userToken, secret.sign, {expiresIn: '10h'})  // 签发token
+        const token = jwt.sign(userToken, secret.sign, {expiresIn: '50h'})  // 签发token
         ctx.body = {
           message: '登录成功！',
           data: {
@@ -104,7 +104,7 @@ class UserController {
    */
   static async getUserName(ctx) {
     let username = ctx.query.username;
-
+    
     if(username) {
       let userData = await userModel.findUserByName(username)
       ctx.body = {
