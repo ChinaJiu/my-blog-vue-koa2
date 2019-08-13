@@ -1,9 +1,9 @@
 <template>
   <div class="app-main">
-    app-main
+    <!-- app-main
     <div>username: {{userName}}</div>
     <div>avatar: {{userAvatar}}</div>
-    <div>token: {{token}}</div>
+    <div>token: {{token}}</div> -->
     <router-view/>
   </div>
 </template>
@@ -38,8 +38,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .app-main{
-  width: 100%;
+  
 }
 </style>

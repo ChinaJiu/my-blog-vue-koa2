@@ -2,7 +2,7 @@
 	<div class="layout-wrap">
 		<!-- sidebar -->
 		<div class="sidebar-page">
-			<sidebar />
+			<sidebar/>
 		</div>
 
 		<div class="main-wrap">
@@ -33,13 +33,24 @@ export default {
 .layout-wrap{
 	width: 100%;
 	height: 100%;
-	display: flex;
+	// display: flex;
+	// justify-content: space-between;
+	position: relative;
 
 	.sidebar-page{
 		height: 100%;
+		position: fixed;
+		width: $sideBarWidth;
+		height: 100%;
 	}
 	.main-wrap{
-		width: 100%;
+		position: relative;
+		width: calc(100% - $sideBarWidth) ;
+		margin-left: $sideBarWidth;
+		.appmain-page{
+			position: relative;
+			padding: 20px;
+		}
 	}
 }
 

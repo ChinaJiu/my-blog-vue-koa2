@@ -2,13 +2,14 @@
   <div class="sidebar">
     <el-scrollbar wrap-class="sidebar-scrollbar">
       <el-menu
-        :unique-opened="false"
-        :collapse-transition="false"
+        class="el-menu-vertical-demo"
+        :collapse="isOpen"
         mode="vertical"
       >
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+      <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
+    
   </div>
 </template>
 <script>
@@ -20,6 +21,7 @@ export default {
   },
   data () {
     return {
+      isOpen: false
     }
   },
   created () {
@@ -30,13 +32,17 @@ export default {
   },
   computed: {
     ...mapGetters(['permission_routes'])
+  },
+  methods: {
+    
   }
 }
 </script>
+
 <style lang='scss'>
-.el-menu{
-  border-right: none;
-}
+// .el-menu{
+//   border-right: none;
+// }
 </style>
 
 <style lang='scss' scoped>

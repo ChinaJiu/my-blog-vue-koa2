@@ -1,14 +1,16 @@
 import { constantRoutes } from '@/router/constantRoutes'
 import { asyncRouterMap } from '@/router/asyncRouterMap'
 
+// 该路由是否有权限
 function hasPermission (roles, route) {
-  if (route.meta && route.meta.roles.length !== 0) {
+  if (route.meta && route.meta.roles) {
     return roles.some(role => route.meta.roles.includes(role)) 
   } else { 
     return true
   }
 }
 
+// 递归遍历路由
 export function filterAsyncRoutes (routes, roles) {
   let res = []
   routes.forEach(route => {

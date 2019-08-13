@@ -1,5 +1,7 @@
 import Layout from '@/layout'
-// import Permission from '@/views/permission'
+import Report from '@/router/modules/report'
+import Repository from '@/router/modules/repository'
+import System from '@/router/modules/system'
 
 /**
  * meta.roles 页面需要的权限
@@ -9,27 +11,25 @@ import Layout from '@/layout'
  */
 export const asyncRouterMap = [
   {
-    path: '/permission',
+    path: '/task',
     component: Layout,
-    name: '权限测试',
-    meta: { title: 'permission', icon: 'share', roles: [] },
+    name: '任务管理',
+    meta: { title: '任务管理', icon: 'share' },
     children: [
       { 
-        path: 'index1',
-        name: '权限测试页',
-        meta: { roles: ['adminA'], title: 'index1', icon: 'edit' } // 页面需要的权限
+        path: 'allot',
+        name: '分配任务',
+        meta: { roles: ['adminA'], title: '分配任务', icon: 'edit' } // 页面需要的权限
       },
       { 
-        path: 'index2',
-        name: '权限测试页',
-        meta: { roles: ['adminB'], title: 'index2', icon: 'edit' } // 页面需要的权限
-      },
-      { 
-        path: 'index3',
-        name: '权限测试页',
-        meta: { roles: [], title: 'index3', icon: 'edit' } // 页面需要的权限
+        path: 'accept',
+        name: '接受任务',
+        meta: { roles: [], title: '接受任务', icon: 'edit' } // 页面需要的权限
       }]
   },
+  Report,
+  Repository,
+  System,
   { 
     path: '*', 
     redirect: '/404',

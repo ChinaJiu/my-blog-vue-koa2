@@ -1,16 +1,17 @@
 <template>
   <div class="item-wrapper" v-if="!item.hidden">
-    <!-- {{item.hidden}}1 -->
     <template v-if="hasOneShowingChild(item.children,item)">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="item.path">
+          <!-- <i :class="'el-icon-'+onlyOneChild.meta.icon"></i>
+          <span slot="title">{{onlyOneChild.meta.title}}</span> -->
           <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title" />
         </el-menu-item>
       </app-link>
     </template>
-
+    
     <template v-else>
-      <el-submenu ref="subMenu" :index="item.path" popper-append-to-body>
+      <el-submenu ref="subMenu" :index="item.path">
         <template slot="title">
           <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title" />
         </template>
@@ -24,6 +25,7 @@
         />
       </el-submenu>
     </template>
+
   </div>
 </template>
 <script>
@@ -84,7 +86,7 @@ export default {
       if (/^(https?:|mailto:|tel:)/.test(routePath)) {
         return routePath
       }
-      console.log(this.basePath, routePath, path.resolve(this.basePath, routePath))
+      // console.log(this.basePath, routePath, path.resolve(this.basePath, routePath))
       // console.log('path.resolve---', path.resolve(this.basePath, routePath))
       return path.resolve(this.basePath, routePath)
     }

@@ -36,4 +36,7 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.el-breadcrumb{
+  display: inline-block;
+}
 </style>
