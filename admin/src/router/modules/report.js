@@ -4,7 +4,7 @@ export default {
   path: '/report',
   component: Layout,
   name: 'report',
-  meta: { title: '报告管理', icon: 'edit' },
+  meta: { title: '报告管理', icon: 'tickets' },
   children: [
     {
       path: 'create',

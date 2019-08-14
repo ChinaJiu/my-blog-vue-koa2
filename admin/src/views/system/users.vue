@@ -5,7 +5,27 @@
       <search title="用户名 / 姓名"></search>
     </div>
     <!-- 新增用户 -->
-    <div class="add-user-btn"><el-button type="primary">新增用户</el-button></div>
+    <div class="add-user-btn">
+      <el-button type="primary" @click="dialogFormVisible = true">新增用户</el-button>
+    </div>
+
+    <el-dialog title="新增用户" :visible.sync="dialogFormVisible">
+      <!-- <el-form :model="form">
+        <el-form-item label="活动名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="活动区域" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form> -->
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
 
     <!-- table -->
     <div class="table-page">
@@ -30,6 +50,10 @@
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="handleEdit(scope.$index, scope.row)">查询</el-button>
             <el-button
               size="mini"
               @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -76,7 +100,8 @@ export default {
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        }],
+        dialogFormVisible: false
     }
   },
   components: {

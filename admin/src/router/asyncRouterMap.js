@@ -14,7 +14,7 @@ export const asyncRouterMap = [
     path: '/task',
     component: Layout,
     name: '任务管理',
-    meta: { title: '任务管理', icon: 'share' },
+    meta: { title: '任务管理', icon: 'folder-checked' },
     children: [
       { 
         path: 'allot',
@@ -24,8 +24,14 @@ export const asyncRouterMap = [
       { 
         path: 'accept',
         name: '接受任务',
-        meta: { roles: [], title: '接受任务', icon: 'edit' } // 页面需要的权限
-      }]
+        meta: { roles: ['adminB'], title: '接受任务', icon: 'edit' } // 页面需要的权限
+      },
+      { 
+        path: 'adminB',
+        name: 'adminB',
+        meta: { roles: ['admin'], title: 'adminB', icon: 'edit' } // 页面需要的权限
+      }
+    ]
   },
   Report,
   Repository,

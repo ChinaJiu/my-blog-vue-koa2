@@ -19,8 +19,8 @@ export const constantRoutes = [
       {
         path: 'home',
         component: () => import('@/views/home/index'),
-        name: '报告系统',
-        meta: { title: '报告系统', icon: 'lock' }
+        name: 'home',
+        meta: { title: '报告系统', icon: 's-home' }
       }
     ]
   }

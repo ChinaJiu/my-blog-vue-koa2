@@ -1,7 +1,7 @@
 import { constantRoutes } from '@/router/constantRoutes'
 import { asyncRouterMap } from '@/router/asyncRouterMap'
 
-// 该路由是否有权限
+// 该路由是否有权限 （接口返回数组中包含当前路由中的roles为有权限）
 function hasPermission (roles, route) {
   if (route.meta && route.meta.roles) {
     return roles.some(role => route.meta.roles.includes(role)) 
