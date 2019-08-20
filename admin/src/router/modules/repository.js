@@ -9,6 +9,7 @@ export default {
     {
       path: 'type1',
       name: 'type1',
+      component: () => import('@/views/repository/type1'),
       meta: { title: '化疗用药知识库' }
     },
     {
