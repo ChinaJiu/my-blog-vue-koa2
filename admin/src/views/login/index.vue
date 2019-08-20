@@ -14,6 +14,7 @@
           }"
         >
         <el-input 
+          id="username"
           prefix-icon= "el-icon-user"
           ref="username"
           v-model="loginForm.username"
@@ -33,6 +34,7 @@
         }"
         >
         <el-input 
+          id="password"
           prefix-icon= "el-icon-lock"
           v-model="loginForm.password"
           placeholder="PassWord"
@@ -43,7 +45,7 @@
           autocomplete="on"
         />
       </el-form-item>
-      <el-button class="el-submit" type="primary" @click="loginFn()">login</el-button>
+      <el-button id="el-submit" class="el-submit" type="primary" @click="loginFn()">login</el-button>
 
     </el-form>
     

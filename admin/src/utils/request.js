@@ -11,6 +11,7 @@ const service = axios.create({
 
 // 请求拦截
 service.interceptors.request.use(config => {
+  console.log('config', config)
     let data = config.data
     if (data && !data.isLoading) isLoading = false
     openLoading()

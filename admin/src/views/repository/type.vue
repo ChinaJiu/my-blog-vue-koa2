@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { getTableData } from '@/api/repository/type1'
+import { getTableData } from '@/api/repository/type'
 
 export default {
   data () {
@@ -53,14 +53,28 @@ export default {
     }
   },
   async created () {
-    let data = await getTableData()
-    this.widthK = [100, 100, 100, 100]
-
-    if (data) {
-      this.tableKeys = data.data.keys
-      this.tableData = data.data.data
+    
+  },
+  watch: {
+    async $route (route) {
+      console.log('this.$route', route.meta.a)
+      let param = this.$route.meta.a
+      console.log('param', param)
+      let data = await getTableData({
+        params: {
+          a: param
+        }
+      })
+      this.widthK = [100, 100, 100, 100]
+      if (data) {
+        this.tableKeys = data.data.keys
+        this.tableData = data.data.data
+      }
+      this.tableKeys = this.setKeyWidth(this.widthK, this.tableKeys)
     }
-    this.tableKeys = this.setKeyWidth(this.widthK, this.tableKeys)
+  },
+  mounted () {
+    console.log(111)
   },
   activated () {
 

@@ -9,13 +9,14 @@ export default {
     {
       path: 'type1',
       name: 'type1',
-      component: () => import('@/views/repository/type1'),
-      meta: { title: '化疗用药知识库' }
+      component: () => import('@/views/repository/type'),
+      meta: { title: '化疗用药知识库', a: 1 }
     },
     {
       path: 'type2',
       name: 'type2',
-      meta: { title: '药物说明知识库' }
+      component: () => import('@/views/repository/type'),
+      meta: { title: '药物说明知识库', a: 2 }
     },
     {
       path: 'type3',

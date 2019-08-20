@@ -1,9 +1,12 @@
 import request from '@/utils/request'
 
 export async function getTableData (data) {
+  console.log('data', data)
   return request({
-    url: '/study',
+    url: '/type',
     method: 'get',
-    data
+    params: {
+      a: 2
+    }
   })
 }
