@@ -1,5 +1,10 @@
 <template>
   <div class="user-wrap">
+    <!-- 查询 -->
+    <div class="search-page">
+      <search title="用户名 / 姓名"></search>
+    </div>
+
     <!-- table -->
     <div class="table-page">
       <el-table
@@ -25,7 +30,7 @@
           :min-width="item.width">
         </el-table-column>
         
-        <el-table-column label="操作" min-width="280">
+        <el-table-column label="操作" min-width="100">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -43,7 +48,12 @@
 <script>
 import { getTableData } from '@/api/repository/type'
 
+import Search from '@/components/Systemsearch'
+
 export default {
+  components: {
+    Search
+  },
   data () {
     return {
       tableKeys: {},
@@ -52,25 +62,12 @@ export default {
       dialogFormVisible: false
     }
   },
-  async created () {
-    
+  created () {
+    this.getTableData()
   },
   watch: {
-    async $route (route) {
-      console.log('this.$route', route.meta.a)
-      let param = this.$route.meta.a
-      console.log('param', param)
-      let data = await getTableData({
-        params: {
-          a: param
-        }
-      })
-      this.widthK = [100, 100, 100, 100]
-      if (data) {
-        this.tableKeys = data.data.keys
-        this.tableData = data.data.data
-      }
-      this.tableKeys = this.setKeyWidth(this.widthK, this.tableKeys)
+    $route (route) {
+      this.getTableData()
     }
   },
   mounted () {
@@ -80,6 +77,19 @@ export default {
 
   },
   methods: {
+    async getTableData () {
+      let meta = this.$route.meta
+      let data = await getTableData({ 
+        params: { k: meta.a },
+        data: { is: 2 } 
+      })
+      if (data) {
+        this.tableKeys = data.data.k.keys
+        this.tableData = data.data.k.data
+      }
+      this.widthK = [100, 100, 100, 100, 50]
+      this.tableKeys = this.setKeyWidth(this.widthK, this.tableKeys)
+    },
     setKeyWidth (keyW, keys) {
       console.log(keys)
       let a = 0

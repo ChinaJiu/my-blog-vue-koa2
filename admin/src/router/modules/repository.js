@@ -21,7 +21,8 @@ export default {
     {
       path: 'type3',
       name: 'type3',
-      meta: { title: '药物适应症知识库' }
+      component: () => import('@/views/repository/type'),
+      meta: { title: '药物适应症知识库', a: 3 }
     },
     {
       path: 'type4',
